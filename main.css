@@ -1,0 +1,340 @@
+*,*:after,*:before{
+	box-sizing:border-box;
+}
+
+body{
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+header, main, footer{
+	width:100%;
+	margin:0;
+	padding:0;
+	font: 1em Helvetica Neue, Helvetica, Arial, sans-serif;;
+}
+
+ul{
+	list-style:none;
+}
+
+:root{
+
+
+}
+
+
+.logo--way{
+	display:flex;
+	flex-wrap:wrap;
+	/*flex-direction: row;*/
+	justify-content:space-around;
+	width:90%;
+	margin:1% auto;
+}
+
+.logo--image{
+	justify-self:flex-start;
+	-ms-grid-row-align: center;
+	    align-self: center;
+	background:url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iMjU2LjAwMDAwMHB0IiBoZWlnaHQ9IjI1Ni4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDI1Ni4wMDAwMDAgMjU2LjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgo8bWV0YWRhdGE+CkNyZWF0ZWQgYnkgcG90cmFjZSAxLjE1LCB3cml0dGVuIGJ5IFBldGVyIFNlbGluZ2VyIDIwMDEtMjAxNwo8L21ldGFkYXRhPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLjAwMDAwMCwyNTYuMDAwMDAwKSBzY2FsZSgwLjEwMDAwMCwtMC4xMDAwMDApIgpmaWxsPSIjMTExMTExYTYiIHN0cm9rZT0ibm9uZSI+CjxwYXRoIGQ9Ik0yMDQ3IDI1MTEgYy0zIC0yOSAtMTcgLTc3IC0zMSAtMTA3IC02OCAtMTQ5IC0xNzUgLTIyMiAtNTY2IC0zODcKLTM2MCAtMTUyIC00ODUgLTIxNyAtNjE1IC0zMTcgLTE2MyAtMTI2IC0yOTUgLTMxMCAtMzYwIC01MDQgLTQ2IC0xMzcgLTU2Ci0yMDMgLTYyIC00MTQgLTkgLTMyOCAzNyAtNTcyIDEzOSAtNzM0IGwzMCAtNDggMTAxIDAgMTAxIDAgLTQzIDQyIGMtMTM1IDEzMwotMjE3IDM1MSAtMjI4IDYwMyAtNSAxMTYgLTMgMTM2IDE2IDE4NSA1MiAxMzYgMjE0IDI5MiA0NjYgNDQ3IDE1MyA5NSAxNjAgOTMKMjUgLTcgLTExNSAtODYgLTIyMSAtMTgyIC0yODcgLTI2MCAtNjQgLTc2IC0xMzAgLTIwNSAtMTM5IC0yNzIgLTYgLTQ1IC01Ci00NyAyMiAtNTUgNTcgLTE2IDM0NCAtOSA0MzIgMTAgMjgzIDYyIDUzMiAyMTAgNzE4IDQyOSAxOTQgMjI2IDMxOSA0OTIgMzY5Cjc4MiAxOSAxMTQgMTkgMzM4IDAgNDMxIC0xOCA4NSAtNTEgMTg2IC02OSAyMTAgLTExIDE2IC0xNCAxMiAtMTkgLTM0eiIvPgo8L2c+Cjwvc3ZnPgo=");
+	background-position:center;
+	background-size:cover;
+	background-repeat: no-repeat;
+	width:64px;
+	height:64px;
+}
+
+.head--navigation{
+	-ms-grid-row-align:center;
+	    align-self:center;
+	justify-self:flex-end;
+	width:40%;
+	margin-left:16%;
+}
+
+.head--menu{
+	padding:0;
+}
+
+.head--menu .item{
+	display:inline-block;
+	margin-left:1%;
+}
+
+.head--menu .item a{ transition:all 0.2s;  }
+.head--menu .item:hover a{
+	color:#3D3D3D;
+}
+
+/* *******  Wrapper Section  ******** */
+
+.wrapper{
+	width:100%;
+	height:40vw;
+	background:blueviolet;
+	color:#f2f2f2;
+	overflow:hidden;
+}
+
+.wrapper h1{
+	padding:16% 0 0 16%;
+}
+
+.wrapper .title--info{
+	margin-top:0;
+	popacity:0;
+	margin-left:-999px;
+	transition:all 0.3s;
+}
+
+.show_text{
+	opacity:1;
+	margin-left:16% !important;
+	-webkit-animation:textShow 0.4s 0s 1 ease-in;
+	        animation:textShow 0.4s 0s 1 ease-in;
+}
+
+@-webkit-keyframes textShow{
+	0%{margin-left:-999px;opacity:0;}
+	100%{margin-left:16%;opacity:1;}
+}
+
+@keyframes textShow{
+	0%{margin-left:-999px;opacity:0;}
+	100%{margin-left:16%;opacity:1;}
+}
+
+/* ******** Main Block ******** */
+
+main h2{
+	color:#4D4D4D;
+	text-align:center;
+}
+.data--space{
+	border:4px dotted blueviolet;
+	padding:1%;
+	margin-bottom:40px;
+}
+
+/* ******** Footer Block ******** */
+
+footer{
+	wodth:100%;
+	height:65px;
+	background:#4D4D4D;
+	padding:2%;
+}
+
+footer * {
+	padding:0;
+	margin:0;
+}
+
+.copy{
+	text-align:center;
+	vertical-align:middle;
+	color:#f2f2f2;
+}
+
+
+/* ***** ADMIN LOGIN POP UP ***** */
+
+.admin_login_pop_bg{
+	display:none;
+	position:fixed;
+	background:rgba(0,0,0, 0.5);
+	left:0;right:0;
+	top:0;bottom:0;
+	opacity:0;
+	z-index:99;
+}
+
+.admin_login_pop{
+	background:blueviolet;
+	position:relative;
+	width:260px;
+	height:auto;
+	padding:2%;
+	top:50%;
+	left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+	z-index:5;
+}
+
+.cross{
+	position:absolute;
+	font-weight:700;
+	font-size:20px;
+	color:#f2f2f2;
+	top:2px;
+	right:4px;
+	cursor:pointer;
+}
+
+.show_pop_admin{
+	animation:admin_pop 0.4s 0s 1 ease-in-out;
+	display:block !important; opacity:1 !important;
+}
+.admin_name{
+	width:100%;
+}
+.admin_pass{
+	width:100%;
+}
+
+@keyframes admin_pop{
+	0%{display:none;opacity:0;}
+	100%{display:block; opacity:1;}
+}
+
+
+.burger{
+	display:none;
+	background:#4D4D4D;
+	position:absolute;
+	border:1px solid red;
+	top:80px;
+	left:50%;
+	transform:translateX(-50%);
+	width:40%;
+	text-align:center;
+	z-index:3;
+	overflow:hidden;
+}
+
+.burger ul{
+  padding:0;
+  margin:0;
+}
+
+.burger_lines{
+	/*display:none;*/
+	/*left:10%;*/
+	position:absolute;
+	display:none;
+	top:40px;
+	margin: 0 auto;
+	width:40px;
+	height:60px;
+	overflow:hidden;
+}
+
+.burger_lines p{
+	padding:2%;
+	margin:18% 0;
+	width:100%;
+	background:#4D4D4D;
+}
+
+.burger_open{
+  animation:open_brg 0.4s 0s 1 ease-in-out;
+  height:100px;
+  display:block;
+  padding:2%;
+}
+
+.burger_close{
+  animation:close_brg 0.4s 0s 1 ease-in-out;
+  height:0px;
+  display:none;
+  padding:0;
+}
+
+@keyframes open_brg{
+	0%{display:none;height:0;padding:0;}
+	100%{display:block; height:100px; padding:2%;}
+}
+
+@keyframes close_brg{
+	0% {display:block; height:100px; padding:2%;}
+	100% {display:none;height:0;padding:0;}
+}
+
+
+
+
+
+/* ****** ADMIN DASHBOARD ******* */
+.wrap-admin{
+	height:auto;
+	padding-bottom:3%;
+}
+
+.wrap-admin .users_info{
+	margin:0 auto;
+	width:20%;
+	text-align:center;
+}
+
+.wrap-admin .users_info input[type="text"]{
+	width:100%;
+}
+
+
+
+.cross_pop{
+	position:absolute;
+	font-weight:700;
+	font-size:20px;
+	color:#f2f2f2;
+	top:2px;
+	right:4px;
+	cursor:pointer;
+	z-index:15;
+}
+
+
+.open_update_user{
+	display:inline-block;
+	position:relative;
+	width:260px;
+	/*height:60%;*/
+	padding:1%;
+	top:50%;
+	left:50%;
+	trasform:translateX(-50%) translateY(-50%);
+	background:#3D3D3D;
+	/*overflow:hidden;*/
+	opacity:0.9;
+	z-index:100;
+}
+
+.data_pop_up_adm{
+	width:20%;
+	overflow:hidden;
+	opacity:0;
+	/*display:none !important;*/
+}
+
+.data_pop_up_adm input[type="text"]{
+	width:100%;
+	margin:0.5%;
+}
+
+
+
+/* ****** Registration Page ******* */
+.reg_form{
+	border:3px dotted blueviolet;
+	margin:3% auto;
+	text-align:center;
+	padding:1%;
+	width:30%;
+
+}
+
+
+
+
+/* ****** MEDIA QUERYES ******* */
+
+@media (max-width:600px){
+	.head--menu{
+		display:none;
+	}
+	.burger_lines{
+		display:inline-block;
+	}
+}
