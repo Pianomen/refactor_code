@@ -118,11 +118,12 @@ if (!defined('PDO::ATTR_DRIVER_NAME')) {
 
 		if(isset($_POST["log_u_e"]) && $_POST["log_u_e"] && isset($_POST["log_u_p"]) && $_POST["log_u_p"]){
 
-			$user_id = $User::usr_exists($_POST['log_u_e']);
+			$usr = $User::usr_exists($_POST['log_u_e']);
 
-			if( $user_id ){
+			if( $usr ){
 				session_start();
-				$_SESSION["u_id"] = $user_id;
+				$_SESSION["u_id"] = $usr["id"];
+				$_SESSION["state"] = $usr["state"];
 				$_SESSION["time_start_login_usr"] = time();
 				echo "ok";
                 //header("Location: ../users.php", TRUE, 301);
@@ -152,10 +153,68 @@ if (!defined('PDO::ATTR_DRIVER_NAME')) {
 
 		}
 
+
+		# Show only managers
+		if(isset($_POST["managers_show"]) && $_POST["managers_show"] === "show"){
+
+			$response = $User::mgr_show();
+			foreach ($response as $resp_data) {
+
+				echo "<div class='data--fields_admin'>
+						<p style='background:blueviolet; color:snow; padding:1%;'><span class='mgmr_workers'><a href='javascript:;'>".$resp_data['name_surname']."</a></span> | <span>".$resp_data['address']."</span> | <span>".$resp_data['phone']."</span> | <span>".$resp_data['state']."</span> | <span>".$resp_data['email']."</span>&nbsp;&nbsp;&nbsp;&nbsp; <input type='radio' name='radio' style='float:right; margin-right:10%;' value='".$resp_data['id']."' > </p>
+				   </div>";
+			}
+
+			if(!$response){
+				echo "managers cant view";
+				$asoc_data = $User::read();
+				foreach ($asoc_data as $data ) {
+	        		echo "<div class='data--fields_admin'>
+						<p style='background:blueviolet; color:snow; padding:1%;'><span class='mgmr_workers'><a href='javascript:;'>".$data['name_surname']."</a></span> | <span>".$data['address']."</span> | <span>".$data['phone']."</span> | <span>".$data['state']."</span> | <span>".$data['email']."</span>&nbsp;&nbsp;&nbsp;&nbsp; <input type='radio' name='radio' style='float:right; margin-right:10%;' value='".$data['id']."' > </p>
+		                </div>";
+				}
+			}
+
+		}
+
+		# unchack manager
+		if( isset($_POST["managers_hide"]) && $_POST["managers_hide"] === "hide" ){
+
+			$asoc_data = $User::read();
+				foreach ($asoc_data as $data ) {
+	        		echo "<div class='data--fields_admin'>
+						<p style='background:blueviolet; color:snow; padding:1%;'><span class='mgmr_workers'><a href='javascript:;'>".$data['name_surname']."</a></span> | <span>".$data['address']."</span> | <span>".$data['phone']."</span> | <span>".$data['state']."</span> | <span>".$data['email']."</span>&nbsp;&nbsp;&nbsp;&nbsp; <input type='radio' name='radio' style='float:right; margin-right:10%;' value='".$data['id']."' > </p>
+		                </div>";
+				}
+		}
+
+
+		#Show only workers
+		if(isset($_POST["workers_show"]) && $_POST["workers_show"] === "show"){
+			$res = $User::wrk_show();
+			foreach ($res as $r ) {
+	        		echo "<div class='data--fields_admin'>
+						<p style='background:blueviolet; color:snow; padding:1%;'><span class='mgmr_workers'><a href='javascript:;'>".$r['name_surname']."</a></span> | <span>".$r['address']."</span> | <span>".$r['phone']."</span> | <span>".$r['state']."</span> | <span>".$r['email']."</span>&nbsp;&nbsp;&nbsp;&nbsp; <input type='radio' name='radio' style='float:right; margin-right:10%;' value='".$r['id']."' > </p>
+		                </div>";
+				}
+		}
+
+		# uncheck workers
+		if(isset($_POST["workers_hide"]) && $_POST["workers_hide"] === "hide"){
+
+			$resp = $User::read();
+			foreach ($resp as $re ) {
+	        		echo "<div class='data--fields_admin'>
+						<p style='background:blueviolet; color:snow; padding:1%;'><span class='mgmr_workers'><a href='javascript:;'>".$re['name_surname']."</a></span> | <span>".$re['address']."</span> | <span>".$re['phone']."</span> | <span>".$re['state']."</span> | <span>".$re['email']."</span>&nbsp;&nbsp;&nbsp;&nbsp; <input type='radio' name='radio' style='float:right; margin-right:10%;' value='".$re['id']."' > </p>
+		                </div>";
+			}
+
+		}
+
 		# Delete user
 		if( isset($_POST["radio_value"]) && $_POST["radio_value"] ){
 
-	            $User::delete($_POST["radio_value"]);
+	        $User::delete($_POST["radio_value"]);
 
 		}
 

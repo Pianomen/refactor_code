@@ -35,7 +35,7 @@
                request.send(content === null ? null : content);
                return;
             },
-            response: function(where = null, callback) {
+            response: function(where = null, callback, bool = true) {
                 let sec = document.querySelector(where);
                 request.onreadystatechange = function() {
                     if(request.readyState < 4 && request.status < 200){
@@ -45,6 +45,9 @@
                     if (request.readyState == 4 && request.status == 200) {
                        if(sec !== null) {
                           sec.innerHTML += request.responseText;
+                       }
+                       if(!bool){
+                          sec.innerHTML = request.responseText;
                        }
 
                        if(callback) callback(request.responseText);
@@ -101,9 +104,77 @@ if(admin_dash){
       pop_adm_edit       = document.querySelector(".open_update_user"),
       clk_close_edit_pop = document.querySelector(".data_pop_up_adm .cross_pop"),
       clk_delete_user    = document.querySelector("button.delete_user")
-      clk_edit_user_btn  = "";
+      clk_edit_user_btn  = "",
+      clk_view_wrk       = document.querySelector(".view_wrk"),
+      clk_view_mgr       = document.querySelector(".view_mgr");
 
 
+
+  // Show and hide workers
+
+  clk_view_wrk.addEventListener("click",function(){
+    toggle_wrk(this);
+  });
+
+  function toggle_wrk(box){
+    if(box.checked){
+
+        const wrks = {
+          show: "show"
+        };
+        async.ready();
+        async.start("POST","routers/rout.php",true);
+        async.contentType();
+        async.response(".data_response", null, false);// container, callback, insert(false) or add(true)
+        async.sending(`workers_show=${wrks.show}`);
+        console.log("checked worker");
+
+    }else{
+
+        const wrks = {
+          hide: "hide"
+        };
+        async.ready();
+        async.start("POST","routers/rout.php",true);
+        async.contentType();
+        async.response(".data_response", null, false);// container, callback, insert(false) or add(true)
+        async.sending(`workers_hide=${wrks.hide}`);
+        console.log("unchecked worker");
+    }
+  }
+
+  // Show and hide managers
+
+  clk_view_mgr.addEventListener("click",function(){
+    toggle_mgr(this);
+  });
+  function toggle_mgr(box2){
+
+    if(box2.checked){
+
+        const mgrs = {
+          show: "show"
+        };
+        async.ready();
+        async.start("POST","routers/rout.php",true);
+        async.contentType();
+        async.response(".data_response", null, false);// container, callback, insert(false) or add(true)
+        async.sending(`managers_show=${mgrs.show}`);
+        console.log("checked manager");
+
+    }else{
+        const mgrs = {
+          hide: "hide"
+        };
+        async.ready();
+        async.start("POST","routers/rout.php",true);
+        async.contentType();
+        async.response(".data_response", null, false);// container, callback, insert(false) or add(true)
+        async.sending(`managers_hide=${mgrs.hide}`);
+        console.log("unchecked manager");
+    }
+
+  }
 
   // Delete the user
  try {
@@ -268,6 +339,8 @@ if(admin_dash){
     current_pop.classList.remove("open_update_user");
 
   });
+
+
 
   // Updating data user
   // let clk_edit_user_btn  = document.querySelector(".update_user_btn");
@@ -447,21 +520,21 @@ if(reg_user_page){
 
    // Validation
 
-  function is_valid(){
+  // function is_valid(){
 
-    return{
-      email: function(fld_email){
-        let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-         if (re.test(fld_email)) return true;
-      },
+  //   return{
+  //     email: function(fld_email){
+  //       let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //        if (re.test(fld_email)) return true;
+  //     },
 
-      email_repeat: function(){
+  //     email_repeat: function(){
 
-      }
+  //     }
 
-    };
-  }
-  const isValid = is_valid();
+  //   };
+  // }
+  // const isValid = is_valid();
 
   clk_register_user.addEventListener("click", function(e){
     e.preventDefault();
@@ -476,22 +549,49 @@ if(reg_user_page){
         em_user: email_user.value
     };
 
-    async.ready();
-    async.start("POST","routers/rout.php",true);
-    async.contentType();
-    async.sending(`na_user=${usr.na_user}&ad_user=${usr.ad_user}&ph_user=${usr.ph_user}&st_user=${usr.st_user}&pa_user=${usr.pa_user}&em_user=${usr.em_user}`);
-    async.response(null, Result);
+    switch(true){
+      case(usr.na_user === "" && usr.ad_user === "" && usr.ph_user === "" && usr.st_user === "" && usr.pa_user === "" && usr.em_user === ""):
+        alert("Registry fields is empty please input your info");
+      break;
+      case(usr.na_user === ""):
+        alert("Name field is empty");
+      break;
+      case(usr.ad_user === ""):
+        alert("address is empty");
+      break;
+      case(usr.ph_user === ""):
+        alert("phone is empty");
+      break;
+      case(usr.st_user === ""):
+        alert("state is empty");
+      break;
+      case(usr.pa_user === ""):
+        alert("password is empty");
+      break;
+      case(usr.em_user === ""):
+        alert("email is empty");
+      break;
 
-      function Result(argm) {
+      default:
+        async.ready();
+        async.start("POST","routers/rout.php",true);
+        async.contentType();
+        async.sending(`na_user=${usr.na_user}&ad_user=${usr.ad_user}&ph_user=${usr.ph_user}&st_user=${usr.st_user}&pa_user=${usr.pa_user}&em_user=${usr.em_user}`);
+        async.response(null, Result);
 
-        if(argm === "email_exists"){
-          alert("Can't register , that email is exists");
-        }else{
-          alert("Registration success !");
-          setTimeout(function(){ window.location.href = "http://local.projects/new/astudio_task/php/"; }, 400);
+        function Result(argm) {
+
+          if(argm === "email_exists"){
+            alert("Can't register , that email is exists");
+          }else{
+            alert("Registration success !");
+            setTimeout(function(){ window.location.href = "http://local.projects/astudio_task/php/"; }, 400);
+          }
+
         }
 
-      }
+    }
+
 
 
 

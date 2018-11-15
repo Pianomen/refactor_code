@@ -13,19 +13,38 @@ if( isset($_SESSION["u_id"]) ) :
 		header("Location: logout.php");
 	}
 
-	if($_SESSION["u_id"]){}
-?>
+	if( isset($_SESSION["state"]) && $_SESSION["state"] === "worker" ): ?>
+
+		<!-- IF USER IS WORKER -->
 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Users</title>
+	<title>Worker</title>
 </head>
-<body>
+<body style="background:blueviolet;color:snow;">
 	<a href="logout.php">log out</a>
 	<div><h1>Welcome Worker</h1></div>
 </body>
 </html>
 
-<?php endif; ?>
+<?php endif; if( isset($_SESSION["state"]) && $_SESSION["state"] === "manager" ): ?>
+
+	<!-- IF USER IS MANAGER -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Manager</title>
+</head>
+<body style="background:coral;">
+	<a href="logout.php">log out</a>
+	<div><h1>Welcome Manager</h1></div>
+</body>
+</html>
+
+  <?php endif; ?>  <!-- / End SESSION STATE IF -->
+
+<?php endif; ?> <!-- / END SESSION ID IF -->

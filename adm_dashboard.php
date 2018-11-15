@@ -77,7 +77,10 @@ if( isset($_SESSION["adm_name"]) ) :
 		<section class="data--space">
 			<div class="data_categories_workers">
 				<p><span>Name</span> | <span>Address</span> | <span>Phone</span> | <span>State</span> | <span>Email</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 	<button class="update_user_pop">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="delete_user">Delete</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; View &nbsp;&nbsp; <label>Worker: <input type="checkbox" class="view_wrk" checked="true"></label> &nbsp;&nbsp;&nbsp; <label>Manager: <input type="checkbox" class="view_mgr" checked="true"></label></p>
+			 	<button class="update_user_pop">Edit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="delete_user">Delete</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; View &nbsp;&nbsp;
+
+			 	<label>Worker: <input type="checkbox" class="view_wrk"  name="chcheck"></label> &nbsp;&nbsp;&nbsp;
+			 	<label>Manager: <input type="checkbox" class="view_mgr" name="chcheck"></label></p>
 
 			 	<div class="data_pop_up_adm">
 			 		<input type="hidden" class="cross_pop">

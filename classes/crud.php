@@ -93,6 +93,48 @@ class User {
         (self::$db)->exec($q);
     }
 
+    #show managers
+    public static function mgr_show(){
+        try{
+
+            $sql = "SELECT * FROM `workers` WHERE state = 'manager' ORDER BY id DESC";
+            $query = (self::$db)->prepare($sql);
+            $query->execute(); $query_arr = [];
+
+            while($resp = $query->fetch(PDO::FETCH_ASSOC)){
+                array_push($query_arr, $resp);
+            }
+            return $query_arr;
+
+
+        }catch(PDOException $e){
+            print_r("<pre>");
+            echo $e->getMessage();
+        }
+    }
+
+    #show workers
+    public static function wrk_show(){
+
+        try{
+
+            $sql = "SELECT * FROM `workers` WHERE state = 'worker' ORDER BY id DESC";
+            $query = (self::$db)->prepare($sql);
+            $query->execute(); $q_arr = [];
+
+            while($respo = $query->fetch(PDO::FETCH_ASSOC)){
+                array_push($q_arr, $respo);
+            }
+            return $q_arr;
+
+        }catch(PDOException $e){
+            print_r("<pre>");
+            echo $e->getMessage();
+        }
+
+    }
+
+
     # user exists
     public static function usr_exists($usr_e){
 
@@ -111,7 +153,7 @@ class User {
 
         if( $query ){
 
-            $que = "SELECT id FROM `workers` WHERE email=:m";
+            $que = "SELECT * FROM `workers` WHERE email=:m";
             $q = (self::$db)->prepare($que);
             $q->execute(array( ':m' => $usr_e ));
 
