@@ -4,7 +4,7 @@ define("DB_HOST", "local.projects");
 define("DB_NAME", "my_task");
 define("DB_USER", "root");
 define("DB_PASS", "root");
-define("BASE_URL", "http://local.projects/new/astudio_task/php/");
+define("BASE_URL", "http://local.projects/astudio_task/php/");
 
 
 
