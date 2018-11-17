@@ -1,5 +1,4 @@
 (function() {
-
    var request;
     window.Async = function() {
         return {

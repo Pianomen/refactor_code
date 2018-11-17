@@ -6,10 +6,6 @@ require_once(dirname(__FILE__) . "/config.php");
 
 try {
 
-	$conn = new PDO("mysql:host=". DB_HOST .";dbname=". DB_NAME ."", DB_USER, DB_PASS, array(PDO::ATTR_PERSISTENT => true));
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$conn->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND , "SET NAMES utf8mb4_unicode_ci");
-
 	if(isset($_POST["login"])){
 		// require_once(__DIR__."/classes/admin_login.php");
 		if( empty($_POST["admin_n"]) || empty($_POST["admin_p"])){
