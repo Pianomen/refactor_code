@@ -1,57 +1,11 @@
 <?php ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 require_once(dirname(__FILE__) . "/sec.php"); pathcheck(MYPATH);
-
-session_start();
 require_once(dirname(__FILE__) . "/config.php");
 
-try {
 
-	if(isset($_POST["login"])){
-		// require_once(__DIR__."/classes/admin_login.php");
-		if( empty($_POST["admin_n"]) || empty($_POST["admin_p"])){
-
-			echo "Name or Password is empty ";
-
-		}else{
-
-			//$log_in::session_admin($_POST["admin_n"], $_POST["admin_p"]);
-			$sql = "SELECT * FROM admin_account WHERE name=:name AND password=:password";
-
-			$query = $conn->prepare($sql);
-			$query->execute(
-				array(
-					':name'=> $_POST["admin_n"],
-					':password'=> $_POST["admin_p"]
-			    )
-		    );
-
-			$count = $query->rowCount();
-
-			if($count >= 1){
-
-				$_SESSION["adm_name"] = $_POST["admin_n"];
-				$_SESSION['time_start_login'] = time();
-
-				header("Location: adm_dashboard.php");
-
-			}else{
-				header("Location:" . BASE_URL);
-			}
-
-			$conn = null;
-
-		}
-
-		// if(empty()){
-
-		// }
-
-    }
-} catch (Exception $e) {
-	print_r("<pre>");
-	echo $sql . "<br>" . $e->getMessage();
+if(isset($_GET["err"]) && $_GET["err"] === "err"){
+	echo "Admin name or password is not valid";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,7 +62,7 @@ try {
 						<div class="admin_login_pop_bg">
 							<div class="admin_login_pop">
 								<span class="cross">X</span>
-								<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="adm_log">
+								<form action="adm_dashboard.php" method="POST" class="adm_log">
 									<!-- action="<?php //echo htmlspecialchars($_SERVER["PHP_SELF"]) .'?action=lose'?>" -->
 									<label for="a_name">Name (admin)</label> <br>
 									<input type="text" id="a_name" class="admin_name" placeholder="Name" name="admin_n" autocomplete="off"><br> <br>

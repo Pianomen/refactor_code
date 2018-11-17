@@ -1,9 +1,62 @@
-<?php //ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+<?php ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 require_once(realpath("sec.php")); pathcheck(MYPATH);
+require_once(dirname(__FILE__) . "/config.php");
 
-// header("Cache-Control: no-cache, must-revalidate");
+
+
+header("Cache-Control: no-cache, must-revalidate");
+
 
 session_start();
+try {
+
+	if(isset($_POST["login"])){
+		// require_once(__DIR__."/classes/admin_login.php");
+		if( empty($_POST["admin_n"]) || empty($_POST["admin_p"])){
+
+			echo "Name or Password is empty ";
+
+		}else{
+
+			//$log_in::session_admin($_POST["admin_n"], $_POST["admin_p"]);
+			$sql = "SELECT * FROM admin_account WHERE name=:name AND password=:password";
+
+			$query = $conn->prepare($sql);
+			$query->execute(
+				array(
+					':name'=> $_POST["admin_n"],
+					':password'=> $_POST["admin_p"]
+			    )
+		    );
+
+			$count = $query->rowCount();
+
+			if($count >= 1){
+
+				$_SESSION["adm_name"] = $_POST["admin_n"];
+				$_SESSION['time_start_login'] = time();
+
+				header("Location: adm_dashboard.php");
+
+			}else{
+				header("Location:" . BASE_URL);
+			}
+
+			$conn = null;
+
+		}
+
+		// if(empty()){
+
+		// }
+
+    }
+} catch (Exception $e) {
+	print_r("<pre>");
+	echo $sql . "<br>" . $e->getMessage();
+}
+
+
 
 if( isset($_SESSION["adm_name"]) ) :
 	if((time() - $_SESSION["time_start_login"]) > 1800){
@@ -104,8 +157,7 @@ if( isset($_SESSION["adm_name"]) ) :
 
 <?php
 else:
-
- 	echo "Session is not defined";
+		header("Location: index.php?err=err");
 
 endif;
 ?>

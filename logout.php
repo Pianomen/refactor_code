@@ -3,5 +3,6 @@
 
 session_start();
 session_destroy();
+$_SESSion[] = [];
 header("Location:".BASE_URL);
 ?>
