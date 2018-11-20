@@ -1,7 +1,7 @@
 <?php ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
-require_once("../sec.php"); pathcheck(MYPATH);
-require_once("../classes/crud.php");
+require_once(dirname(__FILE__) . "/../sec.php"); pathcheck(MYPATH);
+require_once(dirname(__FILE__) . "/../classes/crud.php");
 
 header("Cache-Control: no-cache, must-revalidate");
 
